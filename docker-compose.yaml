@@ -7,7 +7,7 @@ services:
     networks:
       - searxng
     volumes:
-      - valkey-data2:/data
+      - valkey-data:/data
     logging:
       driver: "json-file"
       options:
@@ -38,5 +38,13 @@ networks:
   searxng:
 
 volumes:
-  valkey-data2:
+  valkey-data:
+    driver_opts:
+      type: none
+      device: /mnt/disk-b/searxng-valkey-data
+      o: bind
   searxng-data:
+    driver_opts:
+      type: none
+      device: /mnt/disk-b/searxng-data
+      o: bind
