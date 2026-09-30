@@ -16,7 +16,11 @@ services:
 
   searxng:
     container_name: searxng
-    image: docker.io/searxng/searxng:latest
+    # Pinned 2026-09-30. Never :latest — an unpinned tag makes the
+    # search backend drift silently, and a stale SearXNG returns
+    # "0 results" instead of an error. crw consumes this instance's JSON API
+    # (search.formats in searxng/settings.yml), so keep it current.
+    image: docker.io/searxng/searxng:2026.9.30-a9d990033
     restart: unless-stopped
     networks:
       - searxng
